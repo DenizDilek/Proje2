@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function EmailCheck(str) {
+            var x = str.split("@").length
+            if (x == 1) {
+                return true;
+            }
+            else { return false }
+
+        }
+        function PassCheck(str) {
+            var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+            
+
+            if (format.test(str) && /[a-z]/.test(str) && /[A-Z]/.test(str) && /[0-9]/.test(str)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function WordCount(str) {
+            return str.split(" ").length;
+        }
+        function allLetters(input2) {
+            var letters = /^[A-Za-z]+$/;
+            if (input2.match(letters)) {
+
+                return true;
+            }
+            else {
+
+                return false;
+            }
+        }
+        function validateForm() {
+            var array = new Array();
+            var false1 = true;
+            var x = document.querySelector("#name").value;
+            if (x == "") {
+                var xz = document.querySelector("#name2").textContent;
+                xz = "Girdiniz veriler kriterlere uymamaktadır.";
+                document.querySelector("#name2").textContent = xz;
+                false1 = false;
+            }
+            else {
+                document.querySelector("#name2").textContent = "";
+            }
+            array[0] = document.querySelector("#email").value;
+            if (array[0] == "" || EmailCheck(array[0]) == true) { 
+                var xz = document.querySelector("#email2").textContent;
+                xz = "Girdiniz veriler kriterlere uymamaktadır.";
+                document.querySelector("#email2").textContent = xz;
+                false1 = false;
+            }
+            else {
+                document.querySelector("#email2").textContent = "";
+            }
+            var x1 = document.querySelector("#sayisal").value;
+            if (x1 == "" || isNaN(x1) == true) {
+                var xz = document.querySelector("#sayisal2").textContent;
+                xz = "Girdiniz veriler kriterlere uymamaktadır.";
+                document.querySelector("#sayisal2").textContent = xz;
+
+                false1 = false;
+            }
+            else {
+                document.querySelector("#sayisal2").textContent = "";
+            }
+            array[2] = document.querySelector("#basamakli").value;
+            var y = array[2];
+            var z = y.toString().length;
+            if (array[2] == "" || z != 12 || isNaN(y) == true) {
+                var xz = document.querySelector("#basamakli2").textContent;
+                xz = "Girdiniz veriler kriterlere uymamaktadır.";
+                document.querySelector("#basamakli2").textContent = xz;
+                false1 = false;
+
+            }
+            else {
+                document.querySelector("#basamakli2").textContent = "";
+            }
+            array[3] = document.querySelector("#alfa").value;
+            if (array[3] == "" || allLetters(array[3]) == false) {
+
+                var xz = document.querySelector("#alfa2").textContent;
+                xz = "Girdiniz veriler kriterlere uymamaktadır.";
+                document.querySelector("#alfa2").textContent = xz;
+                false1 = false;
+            }
+            else {
+                document.querySelector("#alfa2").textContent = "";
+            }
+            array[4] = document.querySelector("#max30").value;
+            var z2 = array[4].toString().length;
+            if (array[4] == "" || z2 > 30 || allLetters(array[4]) == false) {
+                var xz = document.querySelector("#max302").textContent;
+                xz = "Girdiniz veriler kriterlere uymamaktadır.";
+                document.querySelector("#max302").textContent = xz;
+                false1 = false;
+            }
+            else {
+                document.querySelector("#max302").textContent = "";
+            }
+            array[5] = document.querySelector("#uckelime").value;
+            var z3 = WordCount(array[5])
+            if (array[5] == "" || z3 != 3) {
+                var xz = document.querySelector("#uckelime2").textContent;
+                xz = "Girdiniz veriler kriterlere uymamaktadır.";
+                document.querySelector("#uckelime2").textContent = xz;
+                false1 = false;
+            }
+            else {
+                document.querySelector("#uckelime2").textContent = "";
+            }
+            array[6] = document.querySelector("#password").value;
+            var z4 = PassCheck(array[6]);
+            var z5 = array[6].toString().length;
+            if (array[6] == "" || z4 == false || z5 < 8) {
+                var xz = document.querySelector("#password2").textContent;
+                xz = "Girdiniz veriler kriterlere uymamaktadır.";
+                document.querySelector("#password2").textContent = xz;
+                false1 = false;
+            }
+            else {
+                document.querySelector("#password2").textContent = "";
+            }
+            if (false1 == false) {
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+        Aşağıdaki hiçbir input boş olmamalı: <br>
+
+
+        <table style="width:40%">
+            <tr>
+                <td>Boş olmamalı: </td>
+                <td><input type="text" id="name"></td><td id="name2" style="color : red"> </td>
+
+            </tr>
+            <tr>
+                <td>E-mail (Kurallara uygun email): </td>
+                <td><input type="text" id="email"></td><td id="email2" style="color : red"> </td>
+
+            </tr>
+            <tr>
+                <td>Sadece sayısal: </td>
+                <td><input type="text" id="sayisal"></td><td id="sayisal2" style ="color : red"> </td>
+            </tr>
+            <tr>
+                <td>Sadece sayısal olan ve 12 basamak uzunluğundaki sayi: </td>
+                <td><input type="text" id="basamakli"></td><td id="basamakli2" style="color : red"> </td>
+            </tr>
+            <tr>
+                <td>Sadece harf (a..z veya A..Z): </td>
+                <td><input type="text" id="alfa"></td><td id="alfa2" style="color : red"> </td>
+            </tr>
+            <tr>
+                <td>Sadece harf ve en fazla 30 uzunlukta olan string: </td>
+                <td><input type="text" id="max30"></td><td id="max302" style="color : red"> </td>
+            </tr>
+            <tr>
+                <td>3 kelimeden oluşan string: </td>
+                <td><input type="text" id="uckelime"></td><td id="uckelime2" style="color : red"> </td>
+            </tr>
+            <tr>
+                <td>En az 1 büyük harf, en az 1 küçük harf, en az bir rakam ve en az 1 noktalama işareti içeren ve en az 8 uzunluğunda olan metin: </td>
+                <td><input type="text" id="password"></td><td id="password2" style="color : red"> </td>
+            </tr>
+
+
+        </table>
+
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+</html>
